@@ -16,8 +16,12 @@ io.on 'connection', (socket) ->
     newuser = new User 'guest'
 
     socket.on 'chat message', (msg) ->
-        console.log 'message: ' + newuser.name + msg
+        console.log 'message: ' + newuser.name + "> " + msg
         io.emit('chat message', newuser.name + "> " + msg);
+
+    socket.on 'register user', (usrname) ->
+        newuser.name = usrname
+        console.log 'user name: ' + newuser.name
 
 http.listen 3000, () ->
     console.log('connected on port 3000')

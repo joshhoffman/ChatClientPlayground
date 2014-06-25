@@ -15,18 +15,23 @@ $('#registerbutton').click () ->
     console.log 'button clicked'
     socket.emit 'chat message', $('#username').val()
 
+registerButtonHandler = () ->
+    console.log 'button clicked'
+    socket.emit 'register user', $('#username').val()
+    $('.popover-markup>trigger').popover('hide')
+
+$().on('click', () ->
+    $('.popover-code').popover('hide');
+)
+
 $('.popover-markup>.trigger').popover({
     html: 'true'
     title: () ->
         return $(this).parent().find('.head').html()
     content: () ->
-        $(this).find('.content').find('#registerbutton').click () ->
-            console.log 't'
-            socket.emit 'chat message', $('#username').val()
-
         return $(this).parent().find('.content').html()
     placement: 'left'
-})
+}).parent().delegate('#registerbutton', 'click', registerButtonHandler)
 
 
 
